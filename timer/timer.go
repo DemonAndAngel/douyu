@@ -11,12 +11,13 @@ import (
 )
 
 func Timer() {
+	// 初始化邮件驱动
+	InitEmail()
 	s := helpers.GetScheduler(true)
 	limit := viper.GetInt("appConfig.spider.limit")
 	if limit <= 0 {
 		limit = 20
 	}
-	fmt.Println("limit", limit)
 	_, err := s.Every(limit).Second().Do(spiderHandler)
 	if err != nil {
 		panic("调度器启动失败;信息:" + err.Error())
@@ -43,7 +44,7 @@ func spiderHandler() {
 				if !zb.IsSend {
 					zb.IsSend = true
 					zb.SendMsg = "停止直播"
-					go spider.SendEmail(ctx, zb)
+					go SendEmail(ctx, zb)
 				}
 			} else {
 				zb.Status = models.StatusNormal
@@ -53,7 +54,7 @@ func spiderHandler() {
 				if zb.IsSend {
 					zb.IsSend = false
 					zb.SendMsg = "正在直播"
-					go spider.SendEmail(ctx, zb)
+					go SendEmail(ctx, zb)
 				}
 			}
 		}

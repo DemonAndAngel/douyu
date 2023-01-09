@@ -29,8 +29,14 @@
   },
   "appConfig": {
     "spider": {
-      "did": "10000000000000000000000000001501", // 设备号，这里取js里面的默认值
-      "limit": 20 // 爬取间隔(s)
+      "did": "10000000000000000000000000001501",
+      "limit": 20,
+      "email": {
+        "sendUser": "",
+        "sendEmailUser": "",
+        "sendEmailPass": "",
+        "sendHost": "smtp.qq.com:465"
+      },
     }
   }
 }

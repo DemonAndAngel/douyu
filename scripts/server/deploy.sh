@@ -21,4 +21,4 @@ echo "权限修改"
 chown -R app:app $RUN_PATH/bin
 chmod +x $RUN_PATH/bin/run
 # 重新运行程序
-supervisorctl restart qymall
+supervisorctl restart douyu

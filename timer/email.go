@@ -1,4 +1,4 @@
-package spider
+package timer
 
 import (
 	"context"
@@ -8,10 +8,18 @@ import (
 	"github.com/spf13/viper"
 )
 
-var E *email.Email
+var e *email.Email
 
-func init() {
-	E = email.NewEmail("斗鱼推送", "568089002@qq.com", "mjqdlojunzvnbfii", "smtp.qq.com:465")
+// InitEmail 初始化邮件驱动
+func InitEmail() {
+	sendUser := viper.GetString("appConfig.spider.email.sendUser")
+	sendEmailUser := viper.GetString("appConfig.spider.email.sendEmailUser")
+	sendEmailPass := viper.GetString("appConfig.spider.email.sendEmailPass")
+	sendHost := viper.GetString("appConfig.spider.email.sendHost")
+	if sendUser == "" || sendHost == "" || sendEmailUser == "" || sendEmailPass == "" {
+		panic("邮件配置异常,请检查")
+	}
+	e = email.NewEmail(sendUser, sendEmailUser, sendEmailPass, sendHost)
 }
 
 func SendEmail(ctx context.Context, zb models.ZhuBo) {
@@ -21,7 +29,7 @@ func SendEmail(ctx context.Context, zb models.ZhuBo) {
 	}
 	subject, body := genHtml(zb)
 	fmt.Println(subject, body)
-	err := E.Send(ctx, tos, "html", subject, body)
+	err := e.Send(ctx, tos, "html", subject, body)
 	if err != nil {
 		fmt.Println(fmt.Sprintf("发送邮件异常,信息:%s", err.Error()))
 	}
