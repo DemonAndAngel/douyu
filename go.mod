@@ -3,6 +3,7 @@ module douyu
 go 1.16
 
 require (
+	github.com/PuerkitoBio/goquery v1.8.0
 	github.com/dop251/goja v0.0.0-20221229151140-b95230a9dbad
 	github.com/fsnotify/fsnotify v1.6.0
 	github.com/gin-gonic/gin v1.8.2

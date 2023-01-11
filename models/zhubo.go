@@ -51,7 +51,7 @@ func ZhuBoGetToSession(ctx context.Context, search map[string]interface{}) *gorm
 
 func ZhuBoGetToList(ctx context.Context, search map[string]interface{}) (zbs []ZhuBo) {
 	session := ZhuBoGetToSession(ctx, search)
-	session.Order("id desc").Find(&zbs)
+	session.Order("id asc").Find(&zbs)
 	return
 }
 

@@ -160,7 +160,7 @@ func getH5PlayRequest(roomId string, params url.Values) (resp GetH5PlayResponse,
 		return
 	}
 	if code != http.StatusOK {
-		err = errors.New(fmt.Sprintf("code not 200;code:%d", code))
+		err = errors.New(fmt.Sprintf("GetH5Play code not 200;code:%d", code))
 		return
 	}
 	_ = json.Unmarshal(body, &resp)
