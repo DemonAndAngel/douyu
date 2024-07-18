@@ -9,7 +9,6 @@ import (
 	"douyu/utils/config"
 	_ "douyu/utils/config"
 	_ "douyu/utils/helpers"
-	"douyu/utils/snowflake"
 	"flag"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -35,7 +34,6 @@ func main() {
 	config.InitConfig(configFile)
 	models.Migrate()
 	timer.Timer()
-	fmt.Println(snowflake.GenId())
 
 	port := viper.GetInt("port")
 	if port <= 0 {

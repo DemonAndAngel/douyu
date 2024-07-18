@@ -105,7 +105,6 @@ func sendEmail(ctx context.Context, zb models.ZhuBo, mode string) {
 		body = genBodyHtml(zb.Name, subject)
 		break
 	}
-	fmt.Println(subject, body)
 	err := e.Send(ctx, tos, "html", subject, body)
 	if err != nil {
 		fmt.Println(fmt.Sprintf("发送邮件异常,信息:%s", err.Error()))

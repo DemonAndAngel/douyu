@@ -2,12 +2,12 @@ package redis
 
 import (
 	"context"
+	"douyu/utils/helpers"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/go-redis/redis/v8"
 	"github.com/spf13/viper"
-	"douyu/utils/helpers"
 )
 
 type Config struct {
@@ -112,7 +112,6 @@ func ConnectRedisBase(tmpConf *Config) (*redis.Client, error) {
 		DB:           tmpConf.Database,
 		MinIdleConns: 5,
 		OnConnect: func(ctx context.Context, cn *redis.Conn) error {
-			fmt.Println(fmt.Sprintf("连接redis:%v", cn))
 			return nil
 		},
 	})

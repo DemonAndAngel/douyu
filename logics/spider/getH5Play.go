@@ -153,8 +153,6 @@ type GetH5PlayResponse struct {
 }
 
 func getH5PlayRequest(roomId string, params url.Values) (resp GetH5PlayResponse, err error) {
-	fmt.Println("roomId", roomId)
-	fmt.Println("params", params)
 	code, body, err := helpers.Request("POST", fmt.Sprintf(GetH5PlayUri, roomId), nil, params)
 	if err != nil {
 		return
